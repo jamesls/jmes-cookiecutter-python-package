@@ -1,0 +1,2 @@
+{{ cookiecutter.project_slug }}
+Copyright {{ cookiecutter.year }} {{ cookiecutter.full_name }}. All Rights Reserved.
