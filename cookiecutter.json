@@ -5,8 +5,8 @@
 	"project_name": "Python Project",
 	"project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
 	"project_short_description": "James's python package boilerplate.",
-	"release_date": "2016-01-01",
+	"release_date": "2017-01-01",
 	"pypi_username": "{{ cookiecutter.github_username }}",
-	"year": "2016",
+	"year": "2017",
 	"version": "0.0.1"
 }
