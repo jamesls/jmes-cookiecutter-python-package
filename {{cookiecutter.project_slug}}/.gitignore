@@ -1,0 +1,7 @@
+.tox
+.cache
+venv
+docs/build/
+.idea
+__pycache__/
+.coverage
