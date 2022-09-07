@@ -1,0 +1,102 @@
+[tool.poetry]
+name = "{{ cookiecutter.project_slug }}"
+version = "{{ cookiecutter.version }}"
+description = "{{ cookiecutter.project_short_description }}"
+authors = [
+    "{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>",
+]
+license = "Apache-2.0"
+readme = "README.md"
+
+documentation = "https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug }}"
+homepage = "https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug }}"
+repository = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
+]
+
+packages = [
+    { include = "{{ cookiecutter.package_name }}", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9.0, <4.0"
+
+[tool.poetry.dev-dependencies]
+black = "*"
+flake8 = "*"
+flake8-comprehensions = "*"
+flake8-logging-format = "*"
+isort = "*"
+mypy = "*"
+pre-commit = "*"
+pytest = "*"
+pytest-cov = "*"
+mkdocstrings = "*"
+mkdocs-material = "*"
+pymdown-extensions = "*"
+pytest-github-actions-annotate-failures = "*"
+jmeslog = "*"
+poethepoet = "*"
+pylint = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+line_length = 79
+honor_noqa = true
+src_paths = ["src", "tests"]
+
+[tool.black]
+target-version = ["py39"]
+include = '\.pyi?$'
+line-length = 79
+skip_string_normalization = true
+
+[tool.pytest.ini_options]
+addopts = """\
+    --cov {{ cookiecutter.package_name }} \
+    --cov tests \
+    --cov-report term-missing \
+    --no-cov-on-fail \
+"""
+
+[tool.coverage.report]
+fail_under = 100
+exclude_lines = [
+    'if TYPE_CHECKING:',
+    'pragma: no cover'
+]
+
+[tool.mypy]
+disallow_any_unimported = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+strict_equality = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_return_any = true
+check_untyped_defs = true
+show_error_codes = true
+
+
+[tool.poe.tasks]
+pre-commit = "poetry run pre-commit run --all-files"
+test = "poetry run pytest tests/"
+stage-release = "python3 ./scripts/stage-release --output staged-release.zip"
+format-code = [
+  { cmd = "poetry run black ." },
+  { cmd = "poetry run isort ." },
+]
+prcheck = ["pre-commit", "test"]
