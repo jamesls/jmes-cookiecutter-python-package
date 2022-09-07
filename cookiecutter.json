@@ -1,12 +1,12 @@
 {
-	"full_name": "James Saryerwinnie",
-	"email": "js@jamesls.com",
-	"github_username": "jamesls",
+	"full_name": "Your name",
+	"email": "Your email",
+	"github_username": "Github user",
 	"project_name": "Python Project",
 	"project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
-	"project_short_description": "James's python package boilerplate.",
-	"release_date": "2018-01-01",
+        "package_name": "{{ cookiecutter.project_slug.replace('-', '_') }}",
+	"project_short_description": "Project description",
 	"pypi_username": "{{ cookiecutter.github_username }}",
-	"year": "2018",
+	"year": "2022",
 	"version": "0.0.1"
 }
