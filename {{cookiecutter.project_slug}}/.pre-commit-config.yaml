@@ -2,17 +2,32 @@ repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.0.1
     hooks:
+      # Simply check whether files parse as valid python.
       - id: check-ast
+      # Check for files that contain merge conflict strings.
       - id: check-merge-conflict
+      # Check for files with names that would conflict on a
+      # case-insensitive filesystem like MacOS HFS+ or Windows FAT.
       - id: check-case-conflict
+      # Checks for a common error of placing code before the docstring.
       - id: check-docstring-first
+      # Attempts to load all json files to verify syntax.
       - id: check-json
+      # Attempts to load all yaml files to verify syntax.
       - id: check-yaml
+      # Makes sure files end in a newline and only a newline.
       - id: end-of-file-fixer
+      # Trims trailing whitespace.
       - id: trailing-whitespace
+      # Replaces or checks mixed line ending.
       - id: mixed-line-ending
 -   repo: local
     hooks:
+      - id: ruff
+        name: ruff
+        entry: poetry run ruff check .
+        language: system
+        types: [python]
       - id: isort
         name: isort
         entry: poetry run isort
@@ -30,14 +45,3 @@ repos:
         language: system
         types: [python]
         pass_filenames: false
-      - id: flake8
-        name: flake8
-        entry: poetry run flake8
-        language: system
-        types: [python]
-      - id: pylint
-        name: pylint
-        entry: poetry run pylint
-        language: system
-        types: [python]
-        args: ["-E", "src/"]
