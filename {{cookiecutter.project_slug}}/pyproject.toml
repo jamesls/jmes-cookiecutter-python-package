@@ -36,7 +36,6 @@ python = ">=3.8.9, <3.12"
 [tool.poetry.dev-dependencies]
 black = "*"
 isort = "*"
-mypy = "*"
 pre-commit = "*"
 pytest = "*"
 pytest-cov = "*"
@@ -47,6 +46,7 @@ pytest-github-actions-annotate-failures = "*"
 jmeslog = "*"
 poethepoet = "*"
 ruff = "*"
+pyright = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -83,17 +83,15 @@ exclude_lines = [
     '...',
 ]
 
-[tool.mypy]
-disallow_any_unimported = true
-disallow_untyped_defs = true
-no_implicit_optional = true
-strict_equality = true
-warn_unused_ignores = true
-warn_redundant_casts = true
-warn_return_any = true
-check_untyped_defs = true
-show_error_codes = true
+[tool.pyright]
+include = ["src"]
+exclude = ["**/__pycache__"]
 
+reportMissingImports = true
+reportMissingTypeStubs = false
+
+pythonVersion = "3.11"
+pythonPlatform = "All"
 
 [tool.poe.tasks]
 pre-commit = "poetry run pre-commit run --all-files"
