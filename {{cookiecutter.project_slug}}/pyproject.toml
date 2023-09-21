@@ -65,16 +65,20 @@ skip_string_normalization = true
 [tool.pytest.ini_options]
 addopts = """\
     --cov {{ cookiecutter.package_name }} \
-    --cov tests \
     --cov-report term-missing \
     --no-cov-on-fail \
 """
+
+[tool.coverage.run]
+branch = true
+source = ["src/"]
 
 [tool.coverage.report]
 fail_under = 100
 exclude_lines = [
     'if TYPE_CHECKING:',
     'pragma: no cover'
+    '...',
 ]
 
 [tool.mypy]
