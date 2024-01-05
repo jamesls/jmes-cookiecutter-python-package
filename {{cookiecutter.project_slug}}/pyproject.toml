@@ -79,7 +79,7 @@ source = ["src/"]
 fail_under = 100
 exclude_lines = [
     'if TYPE_CHECKING:',
-    'pragma: no cover'
+    'pragma: no cover',
     '...',
 ]
 
