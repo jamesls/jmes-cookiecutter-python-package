@@ -33,9 +33,7 @@ packages = [
 [tool.poetry.dependencies]
 python = ">=3.8.9, <3.12"
 
-[tool.poetry.dev-dependencies]
-black = "*"
-isort = "*"
+[tool.poetry.group.dev.dependencies]
 pre-commit = "*"
 pytest = "*"
 pytest-cov = "*"
@@ -52,17 +50,11 @@ pyright = "*"
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.isort]
-profile = "black"
-line_length = 79
-honor_noqa = true
-src_paths = ["src", "tests"]
-
-[tool.black]
-target-version = ["py311"]
-include = '\.pyi?$'
+[tool.ruff]
 line-length = 79
-skip_string_normalization = true
+
+[tool.ruff.format]
+quote-style = "preserve"
 
 [tool.pytest.ini_options]
 addopts = """\
@@ -94,11 +86,15 @@ pythonVersion = "3.11"
 pythonPlatform = "All"
 
 [tool.poe.tasks]
-check = "poetry run pre-commit run --all-files"
+pre-commit = "poetry run pre-commit run --all-files"
+check = [
+{ cmd = "poetry run ruff check ." },
+{ cmd = "poetry run ruff format --diff ." },
+{ cmd = "poetry run pyright" },
+]
 test = "poetry run pytest tests/"
 stage-release = "python3 ./scripts/stage-release --output staged-release.zip"
 format-code = [
-  { cmd = "poetry run black ." },
-  { cmd = "poetry run isort ." },
+  { cmd = "poetry run ruff format ." },
 ]
-prcheck = ["check", "test"]
+prcheck = ["check", "test", "pre-commit"]

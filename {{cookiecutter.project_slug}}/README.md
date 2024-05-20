@@ -49,27 +49,8 @@ To run the tests for this project run:
 poe test
 ```
 
-### Pre-commit
-
-[Pre-commit](https://pre-commit.com/) hooks runs misc. auto-formatters and
-quality checks to ensure all changes look good before committing.  The same
-changes are also run on Pull Requests so this helps provides a quicker feedback
-loop before submitting a PR.
-
-You can install the hooks with (runs for each commit):
+Before submitting a PR, ensure the `prcheck` task runs successfully:
 
 ```sh
-pre-commit install
-```
-
-Or if you want e.g. want to run all checks manually for all files:
-
-```
-poe pre-commit
-```
-
-Or if you run to the `pre-commit` executable directly:
-
-```sh
-pre-commit run --all-files
+poe prcheck
 ```
