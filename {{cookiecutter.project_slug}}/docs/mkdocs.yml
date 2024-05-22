@@ -1,0 +1,12 @@
+site_name: "{{ cookiecutter.project_slug }}"
+theme:
+  name: material
+nav:
+  - Home: index.md
+markdown_extensions:
+  - pymdownx.snippets
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences
