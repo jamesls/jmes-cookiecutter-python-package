@@ -1,12 +1,12 @@
 {
-	"full_name": "James Saryerwinnie",
-	"email": "Your email",
-	"github_username": "jamesls",
 	"project_name": "Python Project",
 	"project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
         "package_name": "{{ cookiecutter.project_slug.replace('-', '_') }}",
 	"project_short_description": "Project description",
-	"pypi_username": "{{ cookiecutter.github_username }}",
 	"year": "2024",
-	"version": "0.0.1"
+	"version": "0.0.1",
+	"github_username": "jamesls",
+	"full_name": "James Saryerwinnie",
+	"email": "example@example.com",
+	"pypi_username": "{{ cookiecutter.github_username }}",
 }
