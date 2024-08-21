@@ -18,10 +18,7 @@ classifiers = [
   "Operating System :: OS Independent",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Typing :: Typed",
 ]
@@ -31,10 +28,9 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.8.9, <3.12"
+python = ">=3.12.0,<3.13.0"
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "*"
 pytest = "*"
 pytest-cov = "*"
 mkdocstrings = "*"
@@ -84,7 +80,7 @@ exclude = ["**/__pycache__"]
 reportMissingImports = true
 reportMissingTypeStubs = false
 
-pythonVersion = "3.11"
+pythonVersion = "3.12"
 pythonPlatform = "All"
 
 [tool.poe.tasks]
