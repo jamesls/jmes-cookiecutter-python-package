@@ -3,7 +3,7 @@ name = "{{ cookiecutter.project_slug }}"
 version = "{{ cookiecutter.version }}"
 description = "{{ cookiecutter.project_short_description }}"
 authors = [
-    "{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>",
+  "{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>",
 ]
 license = "Apache-2.0"
 readme = "README.md"
@@ -24,13 +24,18 @@ classifiers = [
 ]
 
 packages = [
-    { include = "{{ cookiecutter.package_name }}", from = "src" }
+  { include = "{{ cookiecutter.package_name }}", from = "src" }
 ]
+# Uncomment if you want to include data filse.
+# include = [
+#   "src/{{ cookiecutter.package_name }}/data/*.json",
+# ]
 
 [tool.poetry.dependencies]
 python = ">=3.12.0,<3.13.0"
 
 [tool.poetry.group.dev.dependencies]
+pre-commit = "*"
 pytest = "*"
 pytest-cov = "*"
 mkdocstrings = "*"
@@ -86,13 +91,23 @@ pythonPlatform = "All"
 [tool.poe.tasks]
 pre-commit = "poetry run pre-commit run --all-files"
 check = [
-{ cmd = "poetry run ruff check ." },
-{ cmd = "poetry run ruff format --diff ." },
-{ cmd = "poetry run pyright" },
+  { cmd = "poetry run ruff check ." },
+  { cmd = "poetry run ruff format --diff ." },
+  { cmd = "poetry run pyright" },
 ]
 test = "poetry run pytest tests/"
 stage-release = "python3 ./scripts/stage-release --output staged-release.zip"
 format-code = [
   { cmd = "poetry run ruff format ." },
 ]
+# Similar to check, but also auto fixes issues.
+auto-check = [
+  { cmd = "poetry run ruff check --fix ." },
+  { cmd = "poetry run ruff format ." },
+  { cmd = "poetry run pyright" },
+]
 prcheck = ["check", "test", "pre-commit"]
+
+# Uncomment if you want to add a CLI script.
+# [tool.poetry.scripts]
+# my-cli-command = "module.path.foo:app"
