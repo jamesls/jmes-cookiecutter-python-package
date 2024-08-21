@@ -8,5 +8,5 @@
 	"github_username": "jamesls",
 	"full_name": "James Saryerwinnie",
 	"email": "example@example.com",
-	"pypi_username": "{{ cookiecutter.github_username }}",
+	"pypi_username": "{{ cookiecutter.github_username }}"
 }
