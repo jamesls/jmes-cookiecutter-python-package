@@ -1,0 +1,13 @@
+[project]
+name = "jmes-cookiecutter-python-package"
+version = "0.1.0"
+description = "JMES Cookiecutter Python Package Template"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv]
+dev-dependencies = [
+  "pytest",
+  "cookiecutter",
+]
