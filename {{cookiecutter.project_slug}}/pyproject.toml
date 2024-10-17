@@ -1,16 +1,12 @@
-[tool.poetry]
+[project]
 name = "{{ cookiecutter.project_slug }}"
 version = "{{ cookiecutter.version }}"
 description = "{{ cookiecutter.project_short_description }}"
 authors = [
-  "{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>",
+  { name="{{ cookiecutter.full_name }}", email="{{ cookiecutter.email }}"},
 ]
 license = "Apache-2.0"
 readme = "README.md"
-
-documentation = "https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug }}"
-homepage = "https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug }}"
-repository = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
 
 classifiers = [
   "Development Status :: 3 - Alpha",
@@ -22,35 +18,32 @@ classifiers = [
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Typing :: Typed",
 ]
-
-packages = [
-  { include = "{{ cookiecutter.package_name }}", from = "src" }
+requires-python = ">=3.12.0,<3.13.0"
+dependencies = [
 ]
-# Uncomment if you want to include data filse.
-# include = [
-#   "src/{{ cookiecutter.package_name }}/data/*.json",
-# ]
 
-[tool.poetry.dependencies]
-python = ">=3.12.0,<3.13.0"
-
-[tool.poetry.group.dev.dependencies]
-pre-commit = "*"
-pytest = "*"
-pytest-cov = "*"
-mkdocstrings = "*"
-mkdocs-material = "*"
-pymdown-extensions = "*"
-pytest-github-actions-annotate-failures = "*"
-jmeslog = "*"
-poethepoet = "*"
-ruff = "*"
-pyright = "*"
-pygments = "*"
+[tool.uv]
+dev-dependencies = [
+  "pre-commit",
+  "pytest",
+  "pytest-cov",
+  "mkdocstrings",
+  "mkdocs-material",
+  "pymdown-extensions",
+  "pytest-github-actions-annotate-failures",
+  "jmeslog",
+  "poethepoet",
+  "ruff",
+  "pyright",
+  "pygments",
+]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/{{ cookiecutter.package_name }}"]
 
 [tool.ruff]
 line-length = 79
@@ -70,8 +63,8 @@ addopts = """\
 branch = true
 source = ["src/"]
 
+
 [tool.coverage.report]
-fail_under = 100
 exclude_lines = [
     'if TYPE_CHECKING:',
     'pragma: no cover',
@@ -89,25 +82,24 @@ pythonVersion = "3.12"
 pythonPlatform = "All"
 
 [tool.poe.tasks]
-pre-commit = "poetry run pre-commit run --all-files"
 check = [
-  { cmd = "poetry run ruff check ." },
-  { cmd = "poetry run ruff format --diff ." },
-  { cmd = "poetry run pyright" },
+  { cmd = "uv run ruff check ." },
+  { cmd = "uv run ruff format --diff ." },
+  { cmd = "uv run pyright" },
 ]
-test = "poetry run pytest tests/"
+test = "uv run pytest tests/"
 stage-release = "python3 ./scripts/stage-release --output staged-release.zip"
 format-code = [
-  { cmd = "poetry run ruff format ." },
+  { cmd = "uv run ruff format ." },
 ]
 # Similar to check, but also auto fixes issues.
 auto-check = [
-  { cmd = "poetry run ruff check --fix ." },
-  { cmd = "poetry run ruff format ." },
-  { cmd = "poetry run pyright" },
+  { cmd = "uv run ruff check --fix ." },
+  { cmd = "uv run ruff format ." },
+  { cmd = "uv run pyright" },
 ]
-prcheck = ["check", "test", "pre-commit"]
+prcheck = ["check", "test"]
 
 # Uncomment if you want to add a CLI script.
-# [tool.poetry.scripts]
+# [project.scripts]
 # my-cli-command = "module.path.foo:app"

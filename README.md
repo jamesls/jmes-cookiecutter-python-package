@@ -9,11 +9,11 @@ you to fork this repo and make your own version!
 
 Features include:
 
-* Poetry for dependency management
+* uv for dependency management
 * `pyproject.toml` based build configuration
 * Use Poe the Poet to manage common tasks
-* Mypy, flake8, and pylint for linting/typechecking needs.
-* Adopt auto formatters for Python code (black and isort)
+* Ruff for linting and formatting.
+* pyright for type checking.
 * Use pre-commit to help enforce all PR checks at commit time.
 * Use jmeslog for changelog management.
 * GitHub templates for creating issues
