@@ -34,7 +34,7 @@ dev-dependencies = [
   "jmeslog",
   "poethepoet",
   "ruff",
-  "pyright",
+  "pyright[nodejs]",
   "pygments",
 ]
 
