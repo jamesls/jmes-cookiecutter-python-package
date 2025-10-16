@@ -22,21 +22,21 @@ requires-python = ">=3.12.0,<3.13.0"
 dependencies = [
 ]
 
-[tool.uv]
-dev-dependencies = [
-  "pre-commit",
-  "pytest",
-  "pytest-cov",
-  "mkdocstrings",
-  "mkdocs-material",
-  "pymdown-extensions",
-  "pytest-github-actions-annotate-failures",
-  "jmeslog",
-  "poethepoet",
-  "ruff",
-  "pyright[nodejs]",
-  "pygments",
+[dependency-groups]
+dev = [
+  "pytest>=8.4.2",
+  "pytest-cov>=7.0.0",
+  "mkdocstrings>=0.30.0",
+  "mkdocs-material>=9.6.20",
+  "pymdown-extensions>=10.16.1",
+  "pytest-github-actions-annotate-failures>=0.3.0",
+  "jmeslog>=0.2.0",
+  "poethepoet>=0.37.0",
+  "ruff>=0.13.0",
+  "pyright[nodejs]>=1.1.405",
+  "pygments>=2.19.2",
 ]
+
 
 [build-system]
 requires = ["hatchling"]
@@ -47,6 +47,9 @@ packages = ["src/{{ cookiecutter.package_name }}"]
 
 [tool.ruff]
 line-length = 79
+
+[tool.ruff.lint]
+extend-select = ["C901", "PLR0915", "E501"]
 
 [tool.ruff.format]
 quote-style = "preserve"
@@ -83,20 +86,20 @@ pythonPlatform = "All"
 
 [tool.poe.tasks]
 check = [
-  { cmd = "uv run ruff check ." },
-  { cmd = "uv run ruff format --diff ." },
-  { cmd = "uv run pyright" },
+  { cmd = ".venv/bin/ruff check ." },
+  { cmd = ".venv/bin/ruff format --diff ." },
+  { cmd = ".venv/bin/pyright" },
 ]
-test = "uv run pytest tests/"
+test = ".venv/bin/pytest tests/"
 stage-release = "python3 ./scripts/stage-release --output staged-release.zip"
 format-code = [
-  { cmd = "uv run ruff format ." },
+  { cmd = ".venv/bin/ruff format ." },
 ]
 # Similar to check, but also auto fixes issues.
 auto-check = [
-  { cmd = "uv run ruff check --fix ." },
-  { cmd = "uv run ruff format ." },
-  { cmd = "uv run pyright" },
+  { cmd = ".venv/bin/ruff format ." },
+  { cmd = ".venv/bin/ruff check --fix ." },
+  { cmd = ".venv/bin/pyright" },
 ]
 prcheck = ["check", "test"]
 
