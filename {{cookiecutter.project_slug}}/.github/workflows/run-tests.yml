@@ -31,9 +31,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install a specific version of uv
-        uses: astral-sh/setup-uv@v3
+        uses: astral-sh/setup-uv@v6
         with:
-          version: "0.4.20"
+          version: "0.9.2"
+          enable-cache: true
       - name: Install dependencies
         run: uv sync --all-extras --dev
       - name: Run prcheck
