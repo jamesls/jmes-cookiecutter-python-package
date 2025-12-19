@@ -1,0 +1,14 @@
+id: no-imports-in-test-functions
+language: python
+severity: error
+message: Import statement found inside test function body
+rule:
+  any:
+    - kind: import_statement
+    - kind: import_from_statement
+  inside:
+    kind: function_definition
+    stopBy: end
+    has:
+      field: name
+      regex: "^test_"
